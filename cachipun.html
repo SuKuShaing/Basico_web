@@ -13,17 +13,58 @@
             let pc = 2;
             jugador = prompt("¿Qué eliges un número?\n1. Piedra\n2. Papel\n3. Tijera");
             
+            // Validación de la elección del jugador
             if (jugador == 1) {
-                alert("Elegiste Piedra");
+                alert("Elegiste Piedra 🥌");
             }
             else if (jugador == 2) {
-                alert("Elegiste Papel");
+                alert("Elegiste Papel 🧻");
             }
             else if (jugador == 3) {
-                alert("Elegiste Tijera");
+                alert("Elegiste Tijera ✂️");
             }
             else {
                 alert("Elegiste PERDER!!!");
+            }
+
+            // Validación de la elección de la PC
+            if (pc == 1) {
+                alert("PC eligió Piedra 🥌");
+            }
+            else if (pc == 2) {
+                alert("PC eligió Papel 🧻");
+            }
+            else if (pc == 3) {
+                alert("PC eligió Tijera ✂️");
+            }
+            else {
+                alert("PC eligió una opción incorrecta");
+            }
+
+            // Combate
+            if (pc == jugador) { // Empate
+                alert("Empate");
+            }
+            else if (pc == 1 && jugador == 2) { // pc = piedra y jugador = papel -> gana jugador
+                alert("Ganaste");
+            }
+            else if (pc == 1 && jugador == 3) { // pc = piedra y jugador = tijera -> gana pc
+                alert("Perdiste");
+            }
+            else if (pc == 2 && jugador == 1) { // pc = papel y jugador = piedra -> gana pc
+                alert("Perdiste");
+            }
+            else if (pc == 2 && jugador == 3) { // pc = papel y jugador = tijera -> gana jugador
+                alert("Ganaste");
+            }
+            else if (pc == 3 && jugador == 1) { // pc = tijera y jugador = piedra -> gana jugador
+                alert("Ganaste"); 
+            }
+            else if (pc == 3 && jugador == 2) { // pc = tijera y jugador = papel -> gana pc
+                alert("Perdiste");
+            }
+            else {
+                alert("Error en el combate");
             }
         </script>
     </head>
