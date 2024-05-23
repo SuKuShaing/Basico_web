@@ -19,9 +19,28 @@ function seleccionarMascotaJugador() {
     } else {
         alert("Debes seleccionar una mascota");
     }
+
+    seleccionarMascotaEnemigo();
 };
 
+function seleccionarMascotaEnemigo() {
+    let spanMascotaEnemigo = document.getElementById('mascota-enemigo');
+
+    let indice = aleatorio(0, 2);
+    let mascotas = ["Hipodoge", "Capipepo", "Ratigueya"];
+    spanMascotaEnemigo.innerHTML = mascotas[indice];
+}
+
+function aleatorio(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+
 window.addEventListener("load", iniciarJuego);
+
+
+
+
 
 /*
 Eventos que podemos escuchar con: addEventListener("")
