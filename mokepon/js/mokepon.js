@@ -59,11 +59,24 @@ function ataqueAleatorioEnemigo() {
     opcionesDeAtaques = ["Fuego", "Agua", "Tierra"];
     let indice = aleatorio(0, 2);
     ataqueEnemigo = opcionesDeAtaques[indice];
+
+    crearMensaje();
+};
+
+function crearMensaje() {
+    let sectionMensajes = document.getElementById("Mensajes");
+
+    let parrafo = document.createElement("p");
+    parrafo.innerHTML = `Tu máscota atacó con ${ataqueJugador} y el enemigo atacó con ${ataqueEnemigo}`;
+
+    sectionMensajes.appendChild(parrafo);
+
 };
 
 function aleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 };
+
 
 
 window.addEventListener("load", iniciarJuego);
