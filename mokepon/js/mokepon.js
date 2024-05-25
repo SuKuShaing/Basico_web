@@ -60,17 +60,30 @@ function ataqueAleatorioEnemigo() {
     let indice = aleatorio(0, 2);
     ataqueEnemigo = opcionesDeAtaques[indice];
 
-    crearMensaje();
+    combate();
 };
 
-function crearMensaje() {
+function combate() {
+    if (ataqueEnemigo == ataqueJugador) { // Empate
+        crearMensaje("Empate");
+    }
+    else if (ataqueEnemigo == 'Fuego' && ataqueJugador == 'Agua' || ataqueEnemigo == 'Agua' && ataqueJugador == 'Tierra' || ataqueEnemigo == 'Tierra' && ataqueJugador == 'Fuego') { 
+        crearMensaje("Ganaste");
+    }
+    else {
+        crearMensaje("Perdiste");
+    }
+};
+
+function crearMensaje(resultado) {
     let sectionMensajes = document.getElementById("Mensajes");
 
+    resultado = resultado.toUpperCase();
+
     let parrafo = document.createElement("p");
-    parrafo.innerHTML = `Tu máscota atacó con ${ataqueJugador} y el enemigo atacó con ${ataqueEnemigo}`;
-
+    parrafo.innerHTML = `Tu mascota atacó con ${ataqueJugador} y el enemigo atacó con ${ataqueEnemigo} - ${resultado}`;
+    
     sectionMensajes.appendChild(parrafo);
-
 };
 
 function aleatorio(min, max) {
