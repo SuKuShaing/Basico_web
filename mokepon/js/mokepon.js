@@ -69,7 +69,6 @@ function combate() {
     let spanVidasJugador = document.getElementById("vidas-jugador");
     let spanVidasEnemigo = document.getElementById("vidas-enemigo");
 
-
     if (ataqueEnemigo == ataqueJugador) { // Empate
         crearMensaje("Empate");
     }
@@ -83,6 +82,8 @@ function combate() {
         vidasJugador--;
         spanVidasJugador.innerHTML = vidasJugador;
     }
+
+    revisarVidas();
 };
 
 function crearMensaje(resultado) {
@@ -92,6 +93,26 @@ function crearMensaje(resultado) {
 
     let parrafo = document.createElement("p");
     parrafo.innerHTML = `Tu mascota atacó con ${ataqueJugador} y el enemigo atacó con ${ataqueEnemigo} - ${resultado}`;
+    
+    sectionMensajes.appendChild(parrafo);
+};
+
+function revisarVidas() {
+    if (vidasEnemigo == 0) {
+        crearMensajeFinal("Felicitaciones, ganaste!");
+
+    } else if (vidasJugador == 0) {
+        crearMensajeFinal("F, perdiste!");
+    }
+};
+
+function crearMensajeFinal(resultadoFinal) {
+    let sectionMensajes = document.getElementById("Mensajes");
+
+    resultadoFinal = resultadoFinal.toUpperCase();
+
+    let parrafo = document.createElement("p");
+    parrafo.innerHTML = `<strong>${resultadoFinal}</strong>`;
     
     sectionMensajes.appendChild(parrafo);
 };
