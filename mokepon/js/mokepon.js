@@ -9,7 +9,10 @@ function aleatorio(min, max) {
 
 function iniciarJuego() {
     let botonMascotaJugador = document.getElementById("boton-mascota");
-    botonMascotaJugador.addEventListener("click", seleccionarMascotaJugador);  
+    botonMascotaJugador.addEventListener("click", seleccionarMascotaJugador);
+
+    let sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque");
+    sectionSeleccionarAtaque.style.display = "none";
 
     let botonFuego = document.getElementById("boton-fuego");
     botonFuego.addEventListener("click", ataqueFuego);
@@ -18,11 +21,23 @@ function iniciarJuego() {
     let botonTierra = document.getElementById("boton-tierra");
     botonTierra.addEventListener("click", ataqueTierra);
 
+    // let sectionMensajes = document.getElementById("Mensajes");
+    // sectionMensajes.style.display = "none";
+
+    let sectionReiniciar = document.getElementById("reiniciar");
+    sectionReiniciar.style.display = "none";
+
     let botonReiniciar = document.getElementById("boton-reiniciar");
     botonReiniciar.addEventListener("click", reiniciarJuego);
 };
 
 function seleccionarMascotaJugador() {
+    let sectionSeleccionarMascota = document.getElementById("seleccionar-mascota");
+    sectionSeleccionarMascota.style.display = "none";
+
+    let sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque");
+    sectionSeleccionarAtaque.style.display = "block";
+
     let inputHipodoge = document.getElementById('hipodoge');
     let inputCapipepo = document.getElementById('capipepo');
     let inputRatigueya = document.getElementById('ratigueya');
@@ -115,12 +130,10 @@ function revisarVidas() {
 
 function crearMensajeFinal(resultadoFinal) {
     let sectionMensajes = document.getElementById("Mensajes");
-
     resultadoFinal = resultadoFinal.toUpperCase();
 
     let parrafo = document.createElement("p");
     parrafo.innerHTML = `<strong>${resultadoFinal}</strong>`;
-    
     sectionMensajes.appendChild(parrafo);
 
 
@@ -130,9 +143,10 @@ function crearMensajeFinal(resultadoFinal) {
     botonAgua.disabled = true
     let botonTierra = document.getElementById("boton-tierra");
     botonTierra.disabled = true
+
+    let sectionReiniciar = document.getElementById("reiniciar");
+    sectionReiniciar.style.display = "block";
 };
-
-
 
 function reiniciarJuego() {
     location.reload();
