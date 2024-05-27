@@ -10,19 +10,30 @@
 <body>
     
     <section id="seleccionar-mascota">
-        <h1 class="titulo">MOKEPON! 🔥 💧 🌿</h1>
+        <h1 class="titulo">Mokepon! 🔥 💧 🌿</h1>
 
-        <h2>Elige a tu Mascosta:</h2>
+        <h2 class="subtitulo">Elige a tu Mascosta:</h2>
         
-        <!-- name="" es el nombre del grupo al que pertenecen -->
-        <label class="tarjeta-de-mokepon" for="hipodoge">Hipodoge</label>
-        <input type="radio" name="mascota" id="hipodoge"/>
-        
-        <label class="tarjeta-de-mokepon" for="capipepo">Capipepo</label>
-        <input type="radio" name="mascota" id="capipepo"/>
-        
-        <label class="tarjeta-de-mokepon" for="ratigueya">Ratigueya</label>
-        <input type="radio" name="mascota" id="ratigueya"/>
+        <div class="tarjetas">
+            <!-- name="" es el nombre del grupo al que pertenecen -->
+            <label class="tarjeta-de-mokepon" for="hipodoge">
+                <p>Hipodoge</p>
+                <img src="./assets/Hipodoge.png" alt="Mokepon Hipodoge">
+            </label>
+            <input type="radio" name="mascota" id="hipodoge"/>
+            
+            <label class="tarjeta-de-mokepon" for="capipepo">
+                <p>Capipepo</p>
+                <img src="./assets/Capipepo.png" alt="Mokepon Capipepo">
+            </label>
+            <input type="radio" name="mascota" id="capipepo"/>
+            
+            <label class="tarjeta-de-mokepon" for="ratigueya">
+                <p>Ratigueya</p>
+                <img src="./assets/Ratigueya.png" alt="Mokepon Ratigueya">
+            </label>
+            <input type="radio" name="mascota" id="ratigueya"/>
+        </div>
         
         <!-- 
             Hipodoge -> Agua
