@@ -50,6 +50,15 @@ input{
     display: none;
 }
 
+.tarjeta-de-mokepon:hover {
+    background: #0d2e6b;
+    cursor: pointer;
+}
+
+input[type=radio]:checked+label {
+    border: 2px solid white;
+}
+
 .tarjeta-de-mokepon img {
     width: 80px;
 }
