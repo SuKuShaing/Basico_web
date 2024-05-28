@@ -64,7 +64,7 @@ input[type=radio]:checked+label {
 }
 
 #boton-mascota {
-        width: 180px;
+    width: 180px;
     height: 40px;
     border-radius: 20px;
     background: transparent;
@@ -73,4 +73,26 @@ input[type=radio]:checked+label {
 
     font-family: "Poppins", sans-serif;
     margin-top: 20px;
+}
+
+#seleccionar-ataque {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.boton-de-ataque {
+    background-color: #11468f;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    border: transparent;
+    width: 100px;
+    color: white;
+    font-family: "Poppins", sans-serif;
+}
+
+.boton-de-ataque:hover {
+    background: #0d2e6b;
+    cursor: pointer;
 }
