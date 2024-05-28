@@ -109,14 +109,23 @@ function combate() {
 };
 
 function crearMensaje(resultado) {
-    let sectionMensajes = document.getElementById("Mensajes");
+    let sectionMensajes = document.getElementById("resultado");
+    let ataquesDelJugador = document.getElementById("ataque-Del-Jugador");
+    let ataquesDelEnemigo = document.getElementById("ataques-Del-Enemigo");
+
+    // let notificacion = document.createElement("p");
+    let nuevoAtaqueDelJugador = document.createElement("p");
+    let nuevoAtaqueDelEnemigo = document.createElement("p");
 
     resultado = resultado.toUpperCase();
 
-    let parrafo = document.createElement("p");
-    parrafo.innerHTML = `Tu mascota atacó con ${ataqueJugador} y el enemigo atacó con ${ataqueEnemigo} - ${resultado}`;
-    
-    sectionMensajes.appendChild(parrafo);
+    sectionMensajes.innerHTML = resultado;
+    nuevoAtaqueDelJugador.innerHTML = ataqueJugador;
+    nuevoAtaqueDelEnemigo.innerHTML = ataqueEnemigo;
+
+    // sectionMensajes.appendChild(notificacion);
+    ataquesDelJugador.appendChild(nuevoAtaqueDelJugador);
+    ataquesDelEnemigo.appendChild(nuevoAtaqueDelEnemigo);
 };
 
 function revisarVidas() {
@@ -129,12 +138,12 @@ function revisarVidas() {
 };
 
 function crearMensajeFinal(resultadoFinal) {
-    let sectionMensajes = document.getElementById("Mensajes");
+    let sectionMensajes = document.getElementById("resultado");
     resultadoFinal = resultadoFinal.toUpperCase();
 
-    let parrafo = document.createElement("p");
-    parrafo.innerHTML = `<strong>${resultadoFinal}</strong>`;
-    sectionMensajes.appendChild(parrafo);
+    // let parrafo = document.createElement("p");
+    sectionMensajes.innerHTML = `<strong>${resultadoFinal}</strong>`;
+    // sectionMensajes.appendChild(parrafo);
 
 
     let botonFuego = document.getElementById("boton-fuego");

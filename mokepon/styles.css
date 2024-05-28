@@ -84,7 +84,7 @@ input[type=radio]:checked+label {
 .boton-de-ataque {
     background-color: #11468f;
     padding: 10px;
-    box-sizing: border-box;
+    box-sizing: bo rder-box;
     border-radius: 20px;
     border: transparent;
     width: 100px;
@@ -95,4 +95,24 @@ input[type=radio]:checked+label {
 .boton-de-ataque:hover {
     background: #0d2e6b;
     cursor: pointer;
+}
+
+#Mensajes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 280px;
+    background: #EEEEEE;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 20px;
+}
+
+#boton-reiniciar {
+    border: 3px solid white;
+    border-radius: 20px;
+    padding: 15px 30px;
+    background-color: #041562;
+    color: white;
+    font-family: "Poppins", sans-serif;
 }
