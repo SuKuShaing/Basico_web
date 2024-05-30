@@ -50,13 +50,17 @@ input{
     display: none;
 }
 
+/* input[type=radio]:checked+label {
+    border: 2px solid white;
+} */
+
+input:checked+label {
+    border: 2px solid white;
+}
+
 .tarjeta-de-mokepon:hover {
     background: #0d2e6b;
     cursor: pointer;
-}
-
-input[type=radio]:checked+label {
-    border: 2px solid white;
 }
 
 .tarjeta-de-mokepon img {
@@ -86,7 +90,7 @@ input[type=radio]:checked+label {
 .boton-de-ataque {
     background-color: #11468f;
     padding: 10px;
-    box-sizing: bo rder-box;
+    box-sizing: border-box;
     border-radius: 20px;
     border: transparent;
     width: 100px;
