@@ -21,6 +21,7 @@ const sectionMensajes = document.getElementById("resultado");
 const ataquesDelJugador = document.getElementById("ataque-Del-Jugador");
 const ataquesDelEnemigo = document.getElementById("ataques-Del-Enemigo");
 
+let mokepones = [];
 
 let ataqueJugador; 
 let ataqueEnemigo;
@@ -33,6 +34,7 @@ class Mokepon { // Las clases se escriben con mayúscula
         this.nombre = nombre;
         this.foto = foto;
         this.vida = vida;
+        this.ataques = [];
     }
 } 
 
@@ -40,6 +42,31 @@ let hipodoge = new Mokepon("Hipodoge", './assets/Hipodoge.png', 5);
 let capipepo = new Mokepon("Capipepo", './assets/Capipepo.png', 5);
 let ratigueya = new Mokepon("Ratigueya", './assets/Ratigueya.png', 5);
 
+mokepones.push(hipodoge, capipepo, ratigueya);
+
+hipodoge.ataques.push(
+    {nombre: "Tsunami 💧", id: 'boton-agua'},
+    {nombre: "Marepoto 💧", id: 'boton-agua'},
+    {nombre: "chorro de agua 💧", id: 'boton-agua'},
+    {nombre: "lanza llamas 🔥", id: 'boton-fuego'},
+    {nombre: "Corta 🌿", id: 'boton-tierra'}
+);
+
+capipepo.ataques.push(
+    {nombre: "ventisca primavera 🌿", id: 'boton-tierra'},
+    {nombre: "golpe rama 🌿", id: 'boton-tierra'},
+    {nombre: "hojas filudas 🌿", id: 'boton-tierra'},
+    {nombre: "Marepoto 💧", id: 'boton-agua'},
+    {nombre: "lanza llamas 🔥", id: 'boton-fuego'},
+);
+
+ratigueya.ataques.push(
+    {nombre: "lanza llamas 🔥", id: 'boton-fuego'},
+    {nombre: "Encierro 🔥", id: 'boton-fuego'},
+    {nombre: "Meteoro 🔥", id: 'boton-fuego'},
+    {nombre: "chorro de agua 💧", id: 'boton-agua'},
+    {nombre: "Corta 🌿", id: 'boton-tierra'}
+);
 
 function aleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
