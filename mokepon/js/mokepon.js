@@ -95,9 +95,9 @@ function iniciarJuego() {
     inputRatigueya = document.getElementById('Ratigueya');
 
     botonMascotaJugador.addEventListener("click", seleccionarMascotaJugador);    
-    botonFuego.addEventListener("click", ataqueFuego);    
+    botonFuego.addEventListener("click", ataqueFuego);
     botonAgua.addEventListener("click", ataqueAgua);
-    botonTierra.addEventListener("click", ataqueTierra);    
+    botonTierra.addEventListener("click", ataqueTierra);
     botonReiniciar.addEventListener("click", reiniciarJuego);
 };
 
@@ -119,9 +119,8 @@ function seleccionarMascotaJugador() {
 };
 
 function seleccionarMascotaEnemigo() {
-    let indice = aleatorio(0, 2);
-    let mascotas = ["Hipodoge", "Capipepo", "Ratigueya"];
-    spanMascotaEnemigo.innerHTML = mascotas[indice];
+    let indice = aleatorio(0, mokepones.length - 1);
+    spanMascotaEnemigo.innerHTML = mokepones[indice].nombre;
 };
 
 function ataqueFuego() {
