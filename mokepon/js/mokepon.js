@@ -24,6 +24,7 @@ const contenedorTarjetas = document.getElementById("contenedorTarjetas");
 let inputHipodoge;
 let inputCapipepo;
 let inputRatiguey;
+let mascotaJugador;
 
 let ataqueJugador; 
 let ataqueEnemigo;
@@ -107,16 +108,31 @@ function seleccionarMascotaJugador() {
 
     if (inputHipodoge.checked) {
         spanMascotaJugador.innerHTML = inputHipodoge.id;
+        mascotaJugador = inputHipodoge.id;
     } else if (inputCapipepo.checked) {
         spanMascotaJugador.innerHTML = inputCapipepo.id;
+        mascotaJugador = inputCapipepo.id;
     } else if (inputRatigueya.checked) {
         spanMascotaJugador.innerHTML = inputRatigueya.id;
+        mascotaJugador = inputRatigueya.id;
     } else {
         alert("Debes seleccionar una mascota");
     }
-
+    
+    extraerAtaques(mascotaJugador);
     seleccionarMascotaEnemigo();
 };
+
+function extraerAtaques(mascota) {
+    let ataques;
+    for (let i = 0; i < mokepones.length; i++) {
+        if (mascota == mokepones[i].nombre) {
+            ataques = mokepones[i].ataques;
+            break;
+        }
+    }
+    mostrarAtaques(ataques);
+}
 
 function seleccionarMascotaEnemigo() {
     let indice = aleatorio(0, mokepones.length - 1);
