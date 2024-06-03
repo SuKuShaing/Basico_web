@@ -26,6 +26,7 @@ let inputCapipepo;
 let inputRatiguey;
 let mascotaJugador;
 let ataquesMokepon;
+let ataqueMokeponEnemigo = [];
 
 let botonFuego;
 let botonAgua;
@@ -34,7 +35,7 @@ let botones = [];
 let ataquesJugador = [];
 
 let ataqueJugador; 
-let ataqueEnemigo;
+let ataqueEnemigo = [];
 let vidasJugador = 3;
 let vidasEnemigo = 3;
 
@@ -158,34 +159,42 @@ function mostrarAtaques(ataques) {
 function secuenciaAtaques() {
     botones.forEach(boton => {
         boton.addEventListener("click", (e) => {
-            if (e.target.textcontent == "🔥") {
-                ataquesJugador.push("Fuego");
+            if (e.target.textContent == "🔥") {
+                ataquesJugador.push("FUEGO");
                 console.log(ataquesJugador);
                 boton.style.backgroundColor = '#112f58';
-            } else if (e.target.textcontent == "💧") {
-                ataquesJugador.push("Agua");
+            } else if (e.target.textContent == "💧") {
+                ataquesJugador.push("AGUA");
                 console.log(ataquesJugador);
                 boton.style.backgroundColor = '#112f58';
             } else {
-                ataquesJugador.push("Tierra");
+                ataquesJugador.push("TIERRA");
                 console.log(ataquesJugador);
                 boton.style.backgroundColor = '#112f58';
             }
+            ataqueAleatorioEnemigo();
         })
     });
-
-    ataqueAleatorioEnemigo();
 };
 
 function seleccionarMascotaEnemigo() {
     let indice = aleatorio(0, mokepones.length - 1);
     spanMascotaEnemigo.innerHTML = mokepones[indice].nombre;
+    ataqueMokeponEnemigo = mokepones[indice].ataques;
 };
 
 function ataqueAleatorioEnemigo() {
-    let indice = aleatorio(0, mokepones.length - 1);
-    opcionesDeAtaques = ["Fuego", "Agua", "Tierra"];
-    ataqueEnemigo = opcionesDeAtaques[indice];
+    let ataqueAleatorio = aleatorio(0, ataqueMokeponEnemigo.length - 1);
+
+    if (ataqueAleatorio == 0 || ataqueAleatorio == 1) {
+        ataqueEnemigo.push("FUEGO");
+    } else if (ataqueAleatorio == 2 || ataqueAleatorio == 3) {
+        ataqueEnemigo.push("AGUA");
+    } else {
+        ataqueEnemigo.push("TIERRA");
+    }
+
+    console.log(ataqueEnemigo);
 
     combate();
 };
