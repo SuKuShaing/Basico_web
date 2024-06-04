@@ -108,7 +108,7 @@ function iniciarJuego() {
     inputCapipepo = document.getElementById('Capipepo');
     inputRatigueya = document.getElementById('Ratigueya');
 
-    botonMascotaJugador.addEventListener("click", seleccionarMascotaJugador);    
+    botonMascotaJugador.addEventListener("click", seleccionarMascotaJugador);  
     botonReiniciar.addEventListener("click", reiniciarJuego);
 };
 
@@ -127,6 +127,7 @@ function seleccionarMascotaJugador() {
         mascotaJugador = inputRatigueya.id;
     } else {
         alert("Debes seleccionar una mascota");
+        reiniciarJuego()
     }
     
     extraerAtaques(mascotaJugador);
@@ -168,14 +169,17 @@ function secuenciaAtaques() {
                 ataquesJugador.push("FUEGO");
                 console.log(ataquesJugador);
                 boton.style.backgroundColor = '#112f58';
+                boton.disabled = true;
             } else if (e.target.textContent == "💧") {
                 ataquesJugador.push("AGUA");
                 console.log(ataquesJugador);
                 boton.style.backgroundColor = '#112f58';
+                boton.disabled = true;
             } else {
                 ataquesJugador.push("TIERRA");
                 console.log(ataquesJugador);
                 boton.style.backgroundColor = '#112f58';
+                boton.disabled = true;
             }
             ataqueAleatorioEnemigo();
         })
@@ -190,7 +194,7 @@ function seleccionarMascotaEnemigo() {
 
 function ataqueAleatorioEnemigo() {
     let ataqueAleatorio = aleatorio(0, ataqueMokeponEnemigo.length - 1);
-
+    // Aquí se puede usar un array donde estén los ataques del mokonepon enemigo y seleccionar con un index aleatorio 
     if (ataqueAleatorio == 0 || ataqueAleatorio == 1) {
         ataqueEnemigo.push("FUEGO");
     } else if (ataqueAleatorio == 2 || ataqueAleatorio == 3) {
@@ -219,8 +223,6 @@ function combate() {
         if (ataquesJugador[index] === ataqueEnemigo[index]) {
             indexAmbosOponentes(index, index)
             crearMensaje("Empate");
-            // victoriasJugador++;
-            // spanVidasJugador.innerHTML = victoriasJugador;
         } else if (ataqueEnemigo[index] == 'Fuego' && ataquesJugador[index] == 'Agua' || ataqueEnemigo[index] == 'Agua' && ataquesJugador[index] == 'Tierra' || ataqueEnemigo[index] == 'Tierra' && ataquesJugador[index] == 'Fuego') { 
             indexAmbosOponentes(index, index)
             crearMensaje("Ganaste");
@@ -287,9 +289,9 @@ function crearMensajeFinal(resultadoFinal) {
 
     sectionMensajes.innerHTML = `<strong>${resultadoFinal}</strong>`;
 
-    botonFuego.disabled = true
-    botonAgua.disabled = true
-    botonTierra.disabled = true
+    // botonFuego.disabled = true
+    // botonAgua.disabled = true
+    // botonTierra.disabled = true
 
     sectionReiniciar.style.display = "block";
 };
