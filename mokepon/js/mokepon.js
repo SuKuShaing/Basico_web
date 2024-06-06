@@ -18,6 +18,10 @@ const ataquesDelEnemigo = document.getElementById("ataques-Del-Enemigo");
 
 const contenedorAtaques = document.getElementById("contenedor-Ataques");
 
+const sectionVerMapa = document.getElementById("ver-mapa");
+const mapa = document.getElementById("mapa");
+
+
 let mokepones = [];
 let opcionesDeMokepones;
 const contenedorTarjetas = document.getElementById("contenedorTarjetas");
@@ -43,6 +47,7 @@ let victoriasJugador = 0;
 let victoriasEnemigo = 0;
 let vidasJugador = 3;
 let vidasEnemigo = 3;
+let lienzo = mapa.getContext("2d");
 
 
 class Mokepon { // Las clases se escriben con mayúscula
@@ -91,6 +96,7 @@ function aleatorio(min, max) {
 function iniciarJuego() {
     sectionSeleccionarAtaque.style.display = "none";
     sectionReiniciar.style.display = "none";
+    sectionVerMapa.style.display = "none";
     
     mokepones.forEach(mokepon => {
         opcionesDeMokepones = `
@@ -114,7 +120,13 @@ function iniciarJuego() {
 
 function seleccionarMascotaJugador() {
     sectionSeleccionarMascota.style.display = "none";
-    sectionSeleccionarAtaque.style.display = "flex";
+    // sectionSeleccionarAtaque.style.display = "flex";
+    sectionVerMapa.style.display = "flex";
+    let imagenDeCapipepo = new Image();
+    imagenDeCapipepo.src = capipepo.foto;
+    lienzo.drawImage(imagenDeCapipepo, 20, 40, 100, 100); // crearImagen(imagen src, posición x, posición y, ancho, alto)
+    //lienzo.fillRect(5, 15, 20, 40); // crearRectangulo(posición x, posición y, ancho, alto)
+
 
     if (inputHipodoge.checked) {
         spanMascotaJugador.innerHTML = inputHipodoge.id;
