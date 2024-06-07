@@ -48,6 +48,7 @@ let victoriasEnemigo = 0;
 let vidasJugador = 3;
 let vidasEnemigo = 3;
 let lienzo = mapa.getContext("2d");
+let intervalo;
 
 
 class Mokepon { // Las clases se escriben con mayúscula
@@ -56,6 +57,14 @@ class Mokepon { // Las clases se escriben con mayúscula
         this.foto = foto;
         this.vida = vida;
         this.ataques = [];
+        this.x = 20;
+        this.y = 30;
+        this.ancho = 80;
+        this.alto = 80;
+        this.mapaFoto = new Image();
+        this.mapaFoto.src = this.foto
+        this.velocidadX = 0;
+        this.velocidadY = 0;
     }
 } 
 
@@ -122,10 +131,13 @@ function seleccionarMascotaJugador() {
     sectionSeleccionarMascota.style.display = "none";
     // sectionSeleccionarAtaque.style.display = "flex";
     sectionVerMapa.style.display = "flex";
-    let imagenDeCapipepo = new Image();
-    imagenDeCapipepo.src = capipepo.foto;
-    lienzo.drawImage(imagenDeCapipepo, 20, 40, 100, 100); // crearImagen(imagen src, posición x, posición y, ancho, alto)
-    //lienzo.fillRect(5, 15, 20, 40); // crearRectangulo(posición x, posición y, ancho, alto)
+    // pintarPersonaje();
+    intervalo = setInterval(pintarPersonaje, 50); // para que se actualice la posición del personaje
+
+
+    // let imagenDeCapipepo = new Image(); // para decirle que voy a crear una imagen en el canvas
+    // imagenDeCapipepo.src = capipepo.foto; // le digo donde buscar la imagen
+    // lienzo.fillRect(5, 15, 20, 40); // crearRectangulo(posición x, posición y, ancho, alto)
 
 
     if (inputHipodoge.checked) {
@@ -310,6 +322,44 @@ function crearMensajeFinal(resultadoFinal) {
 
 function reiniciarJuego() {
     location.reload();
+};
+
+function pintarPersonaje() {
+    capipepo.x += capipepo.velocidadX;
+    capipepo.y += capipepo.velocidadY;
+
+    lienzo.clearRect(0, 0, mapa.width, mapa.height); // limpiar el canvas
+    lienzo.drawImage( // crearImagen(imagen src, posición x, posición y, ancho, alto)
+        capipepo.mapaFoto,
+        capipepo.x,
+        capipepo.y,
+        capipepo.ancho,
+        capipepo.alto
+    );
+};
+
+function moverDerecha() {
+    // capipepo.x += 5;
+    // pintarPersonaje();
+
+    capipepo.velocidadX = 5;
+};
+    
+function moverIzquieda() {
+    capipepo.velocidadX = -5;
+};
+
+function moverAbajo() {
+    capipepo.velocidadY = 5;
+};
+
+function moverArriba() {
+    capipepo.velocidadY = -5;
+};
+
+function detenerMovimiento() {
+    capipepo.velocidadX = 0;
+    capipepo.velocidadY = 0;
 };
 
 window.addEventListener("load", iniciarJuego);
