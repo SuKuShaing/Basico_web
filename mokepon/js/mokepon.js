@@ -55,25 +55,39 @@ let mascotaJugadorObjeto;
 
 
 class Mokepon { // Las clases se escriben con mayúscula
-    constructor(nombre, foto, vida) {
+    constructor(nombre, foto, vida, fotoMapa, x = 10, y = 10) {
         this.nombre = nombre;
         this.foto = foto;
         this.vida = vida;
         this.ataques = [];
-        this.x = 20;
-        this.y = 30;
-        this.ancho = 80;
-        this.alto = 80;
+        this.x = x;
+        this.y = y;
+        this.ancho = 40;
+        this.alto = 40;
         this.mapaFoto = new Image();
-        this.mapaFoto.src = this.foto
+        this.mapaFoto.src = fotoMapa
         this.velocidadX = 0;
         this.velocidadY = 0;
     }
+
+    pintarMokepon() {
+        lienzo.drawImage( // crearImagen(imagen src, posición x, posición y, ancho, alto)
+            this.mapaFoto,
+            this.x,
+            this.y,
+            this.ancho,
+            this.alto
+        );
+    }
 } 
 
-let hipodoge = new Mokepon("Hipodoge", './assets/Hipodoge.png', 5);
-let capipepo = new Mokepon("Capipepo", './assets/Capipepo.png', 5);
-let ratigueya = new Mokepon("Ratigueya", './assets/Ratigueya.png', 5);
+let hipodoge = new Mokepon("Hipodoge", './assets/Hipodoge.png', 5, './assets/Cara hipodoge.webp');
+let capipepo = new Mokepon("Capipepo", './assets/Capipepo.png', 5, './assets/Cara capipepo.webp');
+let ratigueya = new Mokepon("Ratigueya", './assets/Ratigueya.png', 5, './assets/Cara ratigueya.webp');
+
+let hipodogeEnemigo = new Mokepon("Hipodoge", './assets/Hipodoge.png', 5, './assets/Cara hipodoge.webp', 80, 120);
+let capipepoEnemigo = new Mokepon("Capipepo", './assets/Capipepo.png', 5, './assets/Cara capipepo.webp', 150, 95);
+let ratigueyaEnemigo = new Mokepon("Ratigueya", './assets/Ratigueya.png', 5, './assets/Cara ratigueya.webp', 200, 190);
 
 mokepones.push(hipodoge, capipepo, ratigueya);
 
@@ -334,21 +348,19 @@ function pintarCanvas() {
         0,
         0,
         mapa.width, 
-        mapa.height);
-    lienzo.drawImage( // crearImagen(imagen src, posición x, posición y, ancho, alto)
-        mascotaJugadorObjeto.mapaFoto,
-        mascotaJugadorObjeto.x,
-        mascotaJugadorObjeto.y,
-        mascotaJugadorObjeto.ancho,
-        mascotaJugadorObjeto.alto
+        mapa.height
     );
+    hipodogeEnemigo.pintarMokepon();
+    capipepoEnemigo.pintarMokepon();
+    ratigueyaEnemigo.pintarMokepon();
+    mascotaJugadorObjeto.pintarMokepon();
 };
 
 function moverDerecha() {
     mascotaJugadorObjeto.velocidadX = 5;
 };
     
-function moverIzquieda() {
+function moverIzquierda() {
     mascotaJugadorObjeto.velocidadX = -5;
 };
 
@@ -372,7 +384,7 @@ function sePresionoUnaTecla(evento) {
             moverDerecha();
             break;
         case "ArrowLeft":
-            moverIzquieda();
+            moverIzquierda();
             break;
         case "ArrowDown":
             moverAbajo();
