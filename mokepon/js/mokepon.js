@@ -131,9 +131,8 @@ function seleccionarMascotaJugador() {
     sectionSeleccionarMascota.style.display = "none";
     // sectionSeleccionarAtaque.style.display = "flex";
     sectionVerMapa.style.display = "flex";
-    // pintarPersonaje();
-    intervalo = setInterval(pintarPersonaje, 50); // para que se actualice la posición del personaje
 
+    iniciarMapa();
 
     // let imagenDeCapipepo = new Image(); // para decirle que voy a crear una imagen en el canvas
     // imagenDeCapipepo.src = capipepo.foto; // le digo donde buscar la imagen
@@ -360,6 +359,33 @@ function moverArriba() {
 function detenerMovimiento() {
     capipepo.velocidadX = 0;
     capipepo.velocidadY = 0;
+};
+
+function sePresionoUnaTecla(evento) {
+    console.log(evento.key);
+    switch (evento.key) {
+        case "ArrowRight":
+            moverDerecha();
+            break;
+        case "ArrowLeft":
+            moverIzquieda();
+            break;
+        case "ArrowDown":
+            moverAbajo();
+            break;
+        case "ArrowUp":
+            moverArriba();
+            break;
+        default:
+            // siempre tiene que estar este caso
+            break;
+    }
+};
+
+function iniciarMapa() {
+    intervalo = setInterval(pintarPersonaje, 50); // para que se actualice la posición del personaje
+    window.addEventListener("keydown", sePresionoUnaTecla);
+    window.addEventListener("keyup", detenerMovimiento);
 };
 
 window.addEventListener("load", iniciarJuego);
