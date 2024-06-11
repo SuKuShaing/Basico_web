@@ -441,7 +441,7 @@ function sePresionoUnaTecla(evento) {
             moverArriba();
             break;
         default:
-            // siempre tiene que estar este caso
+            // siempre tiene que estar el default
             break;
     }
 };

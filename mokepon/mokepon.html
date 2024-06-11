@@ -30,12 +30,22 @@
     </section>
 
     <section id="ver-mapa">
-        <h1 class="titulo">Recorre el mapa con tu mokepon</h1>
+        <h2 class="subtitulo">Recorre el mapa con tu mokepon</h2>
         <canvas id="mapa"></canvas>
-        <button onmousedown="moverArriba()" onmouseup="detenerMovimiento()">Arriba</button>
-        <button onmousedown="moverIzquierda()" onmouseup="detenerMovimiento()">Izquierda</button>
-        <button onmousedown="moverAbajo()" onmouseup="detenerMovimiento()">Abajo</button>
-        <button onmousedown="moverDerecha()" onmouseup="detenerMovimiento()">Derecha</button>
+        <button onmouseup="detenerMovimiento()" ontouchend="detenerMovimiento()" onmouseout="detenerMovimiento()" onmousedown="moverArriba()" ontouchstart="moverArriba()" oncontextmenu="return false;">Arriba</button>
+        <!-- <button 
+                onmouseup="detenerMovimiento()"    // cuando se suelta el click en pc
+                ontouchend="detenerMovimiento()"   // cuando se suelta el click en movil
+                onmouseout="detenerMovimiento()"   // cuando se mantiene presionado el boton y sale del área del boton en pc
+                onmousedown="moverArriba()"       // cuando se presiona el click en pc
+                ontouchstart="moverArriba()"      // cuando se presiona el click en movil
+                oncontextmenu="return false;"     // para que no aparezca el menu contextual del navegador por mantener presionado
+                >Arriba</button> -->
+        <div>
+            <button onmouseup="detenerMovimiento()" ontouchend="detenerMovimiento()" onmouseout="detenerMovimiento()" onmousedown="moverIzquierda()" ontouchstart="moverIzquierda()">Izquierda</button>
+            <button onmouseup="detenerMovimiento()" ontouchend="detenerMovimiento()" onmouseout="detenerMovimiento()" onmousedown="moverAbajo()" ontouchstart="moverAbajo()">Abajo</button>
+            <button onmouseup="detenerMovimiento()" ontouchend="detenerMovimiento()" onmouseout="detenerMovimiento()" onmousedown="moverDerecha()" ontouchstart="moverDerecha()">Derecha</button>
+        </div>
     </section>
 
     <!-- 2da Pantalla -->
