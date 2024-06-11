@@ -47,6 +47,7 @@ let victoriasJugador = 0;
 let victoriasEnemigo = 0;
 let vidasJugador = 3;
 let vidasEnemigo = 3;
+let Empates = 0;
 let lienzo = mapa.getContext("2d");
 let intervalo;
 let mapaBackground = new Image();
@@ -244,17 +245,17 @@ function secuenciaAtaques() {
         boton.addEventListener("click", (e) => {
             if (e.target.textContent == "🔥") {
                 ataquesJugador.push("FUEGO");
-                console.log(ataquesJugador);
+                // console.log(ataquesJugador);
                 boton.style.backgroundColor = '#112f58';
                 boton.disabled = true;
             } else if (e.target.textContent == "💧") {
                 ataquesJugador.push("AGUA");
-                console.log(ataquesJugador);
+                // console.log(ataquesJugador);
                 boton.style.backgroundColor = '#112f58';
                 boton.disabled = true;
             } else {
                 ataquesJugador.push("TIERRA");
-                console.log(ataquesJugador);
+                // console.log(ataquesJugador);
                 boton.style.backgroundColor = '#112f58';
                 boton.disabled = true;
             }
@@ -271,7 +272,7 @@ function seleccionarMascotaEnemigo(enemigo) {
 };
 
 function ataqueAleatorioEnemigo() {
-    console.log("ataqueMokeponEnemigo ", ataqueMokeponEnemigo);
+    // console.log("ataqueMokeponEnemigo ", ataqueMokeponEnemigo);
     let ataqueAleatorio = aleatorio(0, ataqueMokeponEnemigo.length - 1);
 
     // Aquí se puede usar un array donde estén los ataques del mokonepon enemigo y seleccionar con un index aleatorio 
@@ -282,7 +283,7 @@ function ataqueAleatorioEnemigo() {
     } else {
         ataqueEnemigo.push("TIERRA");
     }
-    console.log(ataqueEnemigo);
+    // console.log(ataqueEnemigo);
     iniciarPelea();
 };
 
@@ -303,7 +304,8 @@ function combate() {
         if (ataquesJugador[index] === ataqueEnemigo[index]) {
             indexAmbosOponentes(index, index)
             crearMensaje("Empate");
-        } else if (ataqueEnemigo[index] == 'Fuego' && ataquesJugador[index] == 'Agua' || ataqueEnemigo[index] == 'Agua' && ataquesJugador[index] == 'Tierra' || ataqueEnemigo[index] == 'Tierra' && ataquesJugador[index] == 'Fuego') { 
+            Empates++; 
+        } else if (ataqueEnemigo[index] == 'FUEGO' && ataquesJugador[index] == 'AGUA' || ataqueEnemigo[index] == 'AGUA' && ataquesJugador[index] == 'TIERRA' || ataqueEnemigo[index] == 'TIERRA' && ataquesJugador[index] == 'FUEGO') { 
             indexAmbosOponentes(index, index)
             crearMensaje("Ganaste");
             victoriasJugador++;
@@ -316,7 +318,6 @@ function combate() {
             victoriasEnemigo++;
             spanVidasEnemigo.innerHTML = victoriasEnemigo;
         }
-        console.log(ataquesJugador[index]);
     }
 
     revisarVidas();
@@ -483,7 +484,7 @@ function revisarColision(enemigo) {
 
     detenerMovimiento();
     clearInterval(intervalo);
-    console.log("Se detectó una Colisión");
+    // console.log("Se detectó una Colisión");
     sectionSeleccionarAtaque.style.display = "flex";
     sectionVerMapa.style.display = "none";
     seleccionarMascotaEnemigo(enemigo);
