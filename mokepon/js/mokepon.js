@@ -55,6 +55,7 @@ let mascotaJugadorObjeto;
 
 
 class Mokepon { // Las clases se escriben con mayúscula
+    // Propiedades
     constructor(nombre, foto, vida, fotoMapa, x = 10, y = 10) {
         this.nombre = nombre;
         this.foto = foto;
@@ -70,6 +71,7 @@ class Mokepon { // Las clases se escriben con mayúscula
         this.velocidadY = 0;
     }
 
+    // Métodos
     pintarMokepon() {
         lienzo.drawImage( // crearImagen(imagen src, posición x, posición y, ancho, alto)
             this.mapaFoto,
@@ -85,7 +87,7 @@ let hipodoge = new Mokepon("Hipodoge", './assets/Hipodoge.png', 5, './assets/Car
 let capipepo = new Mokepon("Capipepo", './assets/Capipepo.png', 5, './assets/Cara capipepo.webp');
 let ratigueya = new Mokepon("Ratigueya", './assets/Ratigueya.png', 5, './assets/Cara ratigueya.webp');
 
-let hipodogeEnemigo = new Mokepon("Hipodoge", './assets/Hipodoge.png', 5, './assets/Cara hipodoge.webp', 80, 120);
+let hipodogeEnemigo = new Mokepon("Hipodoge", './assets/Hipodoge.png', 5, './assets/Cara hipodoge.webp', aleatorio(0, mapa.width), aleatorio(0, mapa.height));
 let capipepoEnemigo = new Mokepon("Capipepo", './assets/Capipepo.png', 5, './assets/Cara capipepo.webp', 150, 95);
 let ratigueyaEnemigo = new Mokepon("Ratigueya", './assets/Ratigueya.png', 5, './assets/Cara ratigueya.webp', 200, 190);
 
@@ -354,6 +356,12 @@ function pintarCanvas() {
     capipepoEnemigo.pintarMokepon();
     ratigueyaEnemigo.pintarMokepon();
     mascotaJugadorObjeto.pintarMokepon();
+
+    if (mascotaJugadorObjeto.velocidadX !== 0 || mascotaJugadorObjeto.velocidadY !== 0) { // Revisa si hay colisión solo sí se está moviendo
+        revisarColision(hipodogeEnemigo); // seleccionar la mascota enemiga
+        revisarColision(capipepoEnemigo);
+        revisarColision(ratigueyaEnemigo);
+    }
 };
 
 function moverDerecha() {
@@ -413,6 +421,29 @@ function obtenerObjetoMascota() {
             return mokepones[i];
         }
     }
+};
+
+function revisarColision(enemigo) {
+    const arribaEnemigo = enemigo.y;
+    const abajoEnemigo = enemigo.y + enemigo.alto;
+    const derechaEnemigo = enemigo.x + enemigo.ancho;
+    const izquierdaEnemigo = enemigo.x;
+
+    const arribaMascota = mascotaJugadorObjeto.y;
+    const abajoMascota = mascotaJugadorObjeto.y + mascotaJugadorObjeto.alto;
+    const derechaMascota = mascotaJugadorObjeto.x + mascotaJugadorObjeto.ancho;
+    const izquierdaMascota = mascotaJugadorObjeto.x;
+
+    if (
+        abajoMascota < arribaEnemigo || 
+        arribaMascota > abajoEnemigo || 
+        derechaMascota < izquierdaEnemigo || 
+        izquierdaMascota > derechaEnemigo) {
+            return // no hay colisión
+    }
+
+    detenerMovimiento();
+    alert("Hay Colisión con " + enemigo.nombre);
 };
 
 window.addEventListener("load", iniciarJuego);
