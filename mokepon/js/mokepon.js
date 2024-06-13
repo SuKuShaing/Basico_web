@@ -21,6 +21,7 @@ const contenedorAtaques = document.getElementById("contenedor-Ataques");
 const sectionVerMapa = document.getElementById("ver-mapa");
 const mapa = document.getElementById("mapa");
 
+let jugadorId = null;
 
 let mokepones = [];
 let opcionesDeMokepones;
@@ -183,6 +184,22 @@ function iniciarJuego() {
 
     botonMascotaJugador.addEventListener("click", seleccionarMascotaJugador);  
     botonReiniciar.addEventListener("click", reiniciarJuego);
+
+    unirseAlJuego();
+};
+
+function unirseAlJuego() {
+    fetch("http://localhost:8080/unirse")
+        .then(function(res) {
+            // console.log(res);
+            if (res.ok) {
+                res.text()
+                    .then(function(id) {
+                        console.log("tu id de jugador es " + id);
+                        jugadorId = id;
+                    })
+            }
+        })
 };
 
 function seleccionarMascotaJugador() {
@@ -207,9 +224,25 @@ function seleccionarMascotaJugador() {
         reiniciarJuego()
     }
 
+    seleccionarMokepon(mascotaJugador);
+
     extraerAtaques(mascotaJugador);
     sectionVerMapa.style.display = "flex";
     iniciarMapa();
+};
+
+function seleccionarMokepon(mascotaJugador) {
+    // Por defecto la solicitud fech es get, si queremos una distinta hay que especificarla
+    fetch("http://localhost:8080/mokepon/" + jugadorId, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ // el cuerpo de la solicitud | stringify convierte un objeto a una cadena de texto
+            mokepon: mascotaJugador
+        })
+    })
+    // .then() // Cuando no se espera respuesta como en este caso que es un post, no es necesario la función .then() puesto que no está esperando nada de vuelta
 };
 
 function extraerAtaques(mascota) {
