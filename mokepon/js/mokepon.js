@@ -238,7 +238,7 @@ function seleccionarMokepon(mascotaJugador) {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ // el cuerpo de la solicitud | stringify convierte un objeto a una cadena de texto
+        body: JSON.stringify({ // el cuerpo de la solicitud | stringify convierte un objeto a una cadena de texto JSON
             mokepon: mascotaJugador
         })
     })
@@ -430,11 +430,26 @@ function pintarCanvas() {
     ratigueyaEnemigo.pintarMokepon();
     mascotaJugadorObjeto.pintarMokepon();
 
+    enviarPosicion(mascotaJugadorObjeto.x, mascotaJugadorObjeto.y);
+
     if (mascotaJugadorObjeto.velocidadX !== 0 || mascotaJugadorObjeto.velocidadY !== 0) { // Revisa si hay colisión solo sí se está moviendo
         revisarColision(hipodogeEnemigo); // seleccionar la mascota enemiga
         revisarColision(capipepoEnemigo);
         revisarColision(ratigueyaEnemigo);
     }
+};
+
+function enviarPosicion(x, y) {
+    fetch(`http://localhost:8080/mokepon/${jugadorId}/posicion`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            x, // x es abreviación de x: x,
+            y  // y es abreviación de y: y
+        })
+    });
 };
 
 function moverDerecha() {
