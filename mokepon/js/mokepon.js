@@ -417,6 +417,10 @@ function pintarCanvas() {
 
     enviarPosicion(mascotaJugadorObjeto.x, mascotaJugadorObjeto.y);
 
+    mokeponesEnemigos.forEach(function(mokepon) {
+        mokepon.pintarMokepon();
+    });
+
     if (mascotaJugadorObjeto.velocidadX !== 0 || mascotaJugadorObjeto.velocidadY !== 0) { // Revisa si hay colisión solo sí se está moviendo
         revisarColision(hipodogeEnemigo); // seleccionar la mascota enemiga
         revisarColision(capipepoEnemigo);
@@ -440,7 +444,7 @@ function enviarPosicion(x, y) {
                 res.json()  // convierte la respuesta a un objeto JSON, es una promesa por ende se le puede encadenar un .then(), para obtener lo que se resuelve de esa promesa
                     .then(function({ enemigos }) {
                         console.log(enemigos);
-                        enemigos.forEach(enemigo => {
+                        mokeponesEnemigos = enemigos.map(enemigo => {
                             let mokeponEnemigo = null;
                             const mokeponNombre = enemigo.mokepon.nombre || "No se detecta Mokepon";
                             if (mokeponNombre === "Hipodoge") {
@@ -454,7 +458,7 @@ function enviarPosicion(x, y) {
                             mokeponEnemigo.x = enemigo.x;
                             mokeponEnemigo.y = enemigo.y;
 
-                            mokeponEnemigo.pintarMokepon();
+                            return mokeponEnemigo;
                         });
                     })
             }
