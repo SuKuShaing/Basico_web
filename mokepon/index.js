@@ -70,7 +70,12 @@ app.post('/mokepon/:jugadorId/posicion', (req, res) => {
         jugadores[jugadorIndex].actualizarPosicion(x, y);
     }
 
-    res.end()
+    // filter compara el elemento y espera un booleano, si es true, lo guarda en el array, si es false, lo descarta
+    const enemigos = jugadores.filter((jugador) => jugador.id !== jugadorId); // filtra los jugadores que no sean el jugador actual
+
+    res.send({
+        enemigos
+    })
 });
 
 app.listen(8080, () => {

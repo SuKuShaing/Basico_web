@@ -22,8 +22,9 @@ const sectionVerMapa = document.getElementById("ver-mapa");
 const mapa = document.getElementById("mapa");
 
 let jugadorId = null;
-
 let mokepones = [];
+let mokeponesEnemigos = [];
+
 let opcionesDeMokepones;
 const contenedorTarjetas = document.getElementById("contenedorTarjetas");
 let inputHipodoge;
@@ -71,7 +72,8 @@ mapa.height = alturaQueBuscamos;
 
 class Mokepon { // Las clases se escriben con mayúscula
     // Propiedades
-    constructor(nombre, foto, vida, fotoMapa) {
+    constructor(nombre, foto, vida, fotoMapa, id = null) {
+        this.id = id;
         this.nombre = nombre;
         this.foto = foto;
         this.vida = vida;
@@ -102,59 +104,42 @@ let hipodoge = new Mokepon("Hipodoge", './assets/Hipodoge.png', 5, './assets/Car
 let capipepo = new Mokepon("Capipepo", './assets/Capipepo.png', 5, './assets/Cara capipepo.webp');
 let ratigueya = new Mokepon("Ratigueya", './assets/Ratigueya.png', 5, './assets/Cara ratigueya.webp');
 
-let hipodogeEnemigo = new Mokepon("Hipodoge", './assets/Hipodoge.png', 5, './assets/Cara hipodoge.webp');
-let capipepoEnemigo = new Mokepon("Capipepo", './assets/Capipepo.png', 5, './assets/Cara capipepo.webp');
-let ratigueyaEnemigo = new Mokepon("Ratigueya", './assets/Ratigueya.png', 5, './assets/Cara ratigueya.webp');
+// let hipodogeEnemigo = new Mokepon("Hipodoge", './assets/Hipodoge.png', 5, './assets/Cara hipodoge.webp');
+// let capipepoEnemigo = new Mokepon("Capipepo", './assets/Capipepo.png', 5, './assets/Cara capipepo.webp');
+// let ratigueyaEnemigo = new Mokepon("Ratigueya", './assets/Ratigueya.png', 5, './assets/Cara ratigueya.webp');
 
 mokepones.push(hipodoge, capipepo, ratigueya);
 
-hipodoge.ataques.push(
+const HIPODOGE_ATAQUES = [
     {nombre: "💧", id: 'boton-agua'},
     {nombre: "💧", id: 'boton-agua'},
     {nombre: "💧", id: 'boton-agua'},
     {nombre: "🔥", id: 'boton-fuego'},
     {nombre: "🌿", id: 'boton-tierra'}
-);
+];
 
-capipepo.ataques.push(
+const CAPIPEPO_ATAQUES = [
     {nombre: "🌿", id: 'boton-tierra'},
     {nombre: "🌿", id: 'boton-tierra'},
     {nombre: "🌿", id: 'boton-tierra'},
     {nombre: "💧", id: 'boton-agua'},
-    {nombre: "🔥", id: 'boton-fuego'},
-);
+    {nombre: "🔥", id: 'boton-fuego'}
+];
 
-ratigueya.ataques.push(
+const RATIGUEYA_ATAQUES = [
     {nombre: "🔥", id: 'boton-fuego'},
     {nombre: "🔥", id: 'boton-fuego'},
     {nombre: "🔥", id: 'boton-fuego'},
     {nombre: "💧", id: 'boton-agua'},
     {nombre: "🌿", id: 'boton-tierra'}
-);
+];
 
-hipodogeEnemigo.ataques.push(
-    {nombre: "💧", id: 'boton-agua'},
-    {nombre: "💧", id: 'boton-agua'},
-    {nombre: "💧", id: 'boton-agua'},
-    {nombre: "🔥", id: 'boton-fuego'},
-    {nombre: "🌿", id: 'boton-tierra'}
-);
+// hipodoge.ataques.push(HIPODOGE_ATAQUES); // le estoy pasando un array de objetos y no el objeto en sí
+hipodoge.ataques.push(...HIPODOGE_ATAQUES); // ... es el operador de propagación, sirve para desempaquetar un array y pasar sus elementos como argumentos a una función
 
-capipepoEnemigo.ataques.push(
-    {nombre: "🌿", id: 'boton-tierra'},
-    {nombre: "🌿", id: 'boton-tierra'},
-    {nombre: "🌿", id: 'boton-tierra'},
-    {nombre: "💧", id: 'boton-agua'},
-    {nombre: "🔥", id: 'boton-fuego'},
-);
+capipepo.ataques.push(...CAPIPEPO_ATAQUES);
 
-ratigueyaEnemigo.ataques.push(
-    {nombre: "🔥", id: 'boton-fuego'},
-    {nombre: "🔥", id: 'boton-fuego'},
-    {nombre: "🔥", id: 'boton-fuego'},
-    {nombre: "💧", id: 'boton-agua'},
-    {nombre: "🌿", id: 'boton-tierra'}
-);
+ratigueya.ataques.push(...RATIGUEYA_ATAQUES);
 
 
 function aleatorio(min, max) {
@@ -425,9 +410,9 @@ function pintarCanvas() {
         mapa.width, 
         mapa.height
     );
-    hipodogeEnemigo.pintarMokepon();
-    capipepoEnemigo.pintarMokepon();
-    ratigueyaEnemigo.pintarMokepon();
+    // hipodogeEnemigo.pintarMokepon();
+    // capipepoEnemigo.pintarMokepon();
+    // ratigueyaEnemigo.pintarMokepon();
     mascotaJugadorObjeto.pintarMokepon();
 
     enviarPosicion(mascotaJugadorObjeto.x, mascotaJugadorObjeto.y);
@@ -449,7 +434,31 @@ function enviarPosicion(x, y) {
             x, // x es abreviación de x: x,
             y  // y es abreviación de y: y
         })
-    });
+    })
+        .then(function(res) {
+            if (res.ok) {  // si la respuesta es correcta
+                res.json()  // convierte la respuesta a un objeto JSON, es una promesa por ende se le puede encadenar un .then(), para obtener lo que se resuelve de esa promesa
+                    .then(function({ enemigos }) {
+                        console.log(enemigos);
+                        enemigos.forEach(enemigo => {
+                            let mokeponEnemigo = null;
+                            const mokeponNombre = enemigo.mokepon.nombre || "No se detecta Mokepon";
+                            if (mokeponNombre === "Hipodoge") {
+                                mokeponEnemigo = new Mokepon("Hipodoge", './assets/Hipodoge.png', 5, './assets/Cara hipodoge.webp');
+                            } else if (mokeponNombre === "Capipepo") {
+                                mokeponEnemigo = new Mokepon("Capipepo", './assets/Capipepo.png', 5, './assets/Cara capipepo.webp');
+                            } else if (mokeponNombre === "Ratigueya") {
+                                mokeponEnemigo = new Mokepon("Ratigueya", './assets/Ratigueya.png', 5, './assets/Cara ratigueya.webp');
+                            }
+
+                            mokeponEnemigo.x = enemigo.x;
+                            mokeponEnemigo.y = enemigo.y;
+
+                            mokeponEnemigo.pintarMokepon();
+                        });
+                    })
+            }
+        })
 };
 
 function moverDerecha() {
