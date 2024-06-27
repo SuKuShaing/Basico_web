@@ -65,6 +65,7 @@ app.post("/mokepon/:jugadorId", (req, res) => {
     res.end(); // se tiene que responder algo, si no, la petición se queda colgada, res.end() es una forma de responder sin enviar nada
 });
 
+// el jugador envía la posición al servidor y se guarda en su objeto-perfil
 app.post('/mokepon/:jugadorId/posicion', (req, res) => {
     const jugadorId = req.params.jugadorId || "No se detecta ID usuario"; // en caso de que no venga nada, se le asigna un string vacío
     const x = req.body.x || 0 ; // 0 sí no se detecta posición x
@@ -86,11 +87,20 @@ app.post('/mokepon/:jugadorId/posicion', (req, res) => {
     })
 });
 
+app.get('/mokepon/:jugadorId/ataques', (req, res) => {
+    const jugadorId = req.params.jugadorId || "No se detecta ID usuario"; // en caso de que no venga nada, se le asigna un string vacío
+    const jugador = jugadores.find((jugador) => jugador.id === jugadorId); // busca el jugador en el array de jugadores
+    res.send({
+        ataques: jugador.ataques || [] // envía un objeto con la lista de ataques del jugador, si no hay ataques, envía una lista vacía
+    })
+})
+
 // Mensaje cuando se enciende el servidor
 app.listen(8080, () => {
     console.log("El servidor está escuchando");
 });
 
+// el jugador envía los ataques seleccionados al servidor y se guardan en su objeto-perfil
 app.post('/mokepon/:jugadorId/ataques', (req, res) => {
     const jugadorId = req.params.jugadorId || "No se detecta ID usuario"; // en caso de que no venga nada, se le asigna un string vacío
     const ataques = req.body.ataques || [] ; // lista vacía sí no se detecta nada, se le debe asignar lo mismo que se envía pero vació
