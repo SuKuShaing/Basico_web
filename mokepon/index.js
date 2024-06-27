@@ -1,7 +1,10 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
+
+app.use(express.static('public'));
 app.use(cors());
 app.use(express.json());
 
@@ -31,6 +34,14 @@ class Mokepon {
         this.nombre = nombre;
     }
 }
+
+// Middleware para servir archivos estáticos
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Ruta para servir el HTML
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'mokepon.html'));
+});
 
 // al unirse con el servidor, se le asigna un id al jugador
 app.get('/unirse', (req, res) => {
