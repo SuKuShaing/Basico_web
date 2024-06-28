@@ -1,4 +1,5 @@
-// const e = require("express");
+// Para ejecutar el servidor y el juego, se debe correr el comando "node index.js" en la terminal, estando en la carpeta mokepon
+
 
 const botonMascotaJugador = document.getElementById("boton-mascota");
 const sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque");

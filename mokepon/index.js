@@ -1,3 +1,5 @@
+// Para ejecutar el servidor y el juego, se debe correr el comando node index.js en la terminal, en la carpeta mokepon
+
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
